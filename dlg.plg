@@ -1,0 +1,39 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: dlg - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSP51.tmp" with contents
+[
+/nologo /ML /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /Fp"Release/dlg.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\Program Files\Microsoft Visual Studio\MyProjects\Libraries\dlg\DLGAttribute.cpp"
+"D:\Program Files\Microsoft Visual Studio\MyProjects\Libraries\dlg\DLGElement.cpp"
+"D:\Program Files\Microsoft Visual Studio\MyProjects\Libraries\dlg\DLGHeader.cpp"
+"D:\Program Files\Microsoft Visual Studio\MyProjects\Libraries\dlg\DLGLine.cpp"
+"D:\Program Files\Microsoft Visual Studio\MyProjects\Libraries\dlg\DLGPoint.cpp"
+"D:\Program Files\Microsoft Visual Studio\MyProjects\Libraries\dlg\DLGPointElement.cpp"
+"D:\Program Files\Microsoft Visual Studio\MyProjects\Libraries\dlg\DLGUtil.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP51.tmp" 
+Creating command line "link.exe -lib /nologo /out:"Release\libdlg.lib"  ".\Release\DLGAttribute.obj" ".\Release\DLGElement.obj" ".\Release\DLGHeader.obj" ".\Release\DLGLine.obj" ".\Release\DLGPoint.obj" ".\Release\DLGPointElement.obj" ".\Release\DLGUtil.obj" "
+<h3>Output Window</h3>
+Compiling...
+DLGAttribute.cpp
+DLGElement.cpp
+DLGHeader.cpp
+DLGLine.cpp
+DLGPoint.cpp
+DLGPointElement.cpp
+DLGUtil.cpp
+Creating library...
+
+
+
+<h3>Results</h3>
+libdlg.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

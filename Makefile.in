@@ -1,0 +1,83 @@
+SHELL		=	/bin/sh
+
+prefix		=	@prefix@
+exec_prefix	=	@exec_prefix@
+host_os		=	@host_os@
+srcdir		=	@srcdir@
+top_srcdir	=	@top_srcdir@
+enable_debug	=	@enable_debug@
+
+# Where to find includes for headers that libdlg depends on.
+INCPATHS = -I$(srcdir)
+
+# Where to install libdem's include files.
+INCDEST = $(prefix)/include/dlg
+
+# Where to install the library.
+LIBDEST = $(prefix)/lib
+
+ifeq ($(enable_debug),yes)
+DEBUG= -g -Wall
+else
+DEBUG= -O3
+endif
+
+CC= @CC@
+CXX= @CXX@
+CXXFLAGS= $(DEBUG) $(INCPATHS)
+
+SRCS=	DLGAttribute.cpp 	\
+	DLGElement.cpp		\
+	DLGHeader.cpp		\
+	DLGLine.cpp		\
+	DLGPoint.cpp		\
+	DLGPointElement.cpp	\
+	DLGUtil.cpp
+
+OBJS=$(SRCS:.cpp=.o)
+
+.SUFFIXES: .o .cpp
+
+# Suffix rules
+.cpp.o:
+	$(CXX) $(CXXFLAGS) -c $<
+
+all: libdlg.a
+	@echo "libdlg.a successfully built."
+
+libdlg.a: $(OBJS)
+	ar rsu libdlg.a $(OBJS)
+
+install: libdlg.a
+	$(top_srcdir)/config/mkinstalldirs $(INCDEST)
+	$(top_srcdir)/config/mkinstalldirs $(LIBDEST)
+	cp *.h $(INCDEST)
+	cp libdlg.a $(LIBDEST)
+
+clean::
+	rm -f core *~ libdlg.a
+
+realclean: clean
+	rm -rf $(OBJS)
+
+distclean: realclean
+	rm -f Makefile config.h config.status config.cache config.log
+
+
+uninstall:
+	rm -rf $(INCDEST)
+	rm -f $(LIBDEST)/libdlg.a
+
+# Automaticall rerun configure if the .in files have changed
+$(srcdir)/configure:	configure.in
+	cd $(srcdir) && autoconf
+
+$(srcdir)/stamp-h:  config.status
+	./config.status
+
+$(srcdir)/Makefile: Makefile.in config.status
+	./config.status
+
+$(srcdir)/config.status: configure
+	./config.status --recheck
+
